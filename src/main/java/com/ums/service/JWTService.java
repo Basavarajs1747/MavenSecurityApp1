@@ -30,8 +30,7 @@ public class JWTService {
     }
 
     public String generateToken(AppUser user) {
-        return JWT.create()
-                .withClaim("name", user.getName())
+        return JWT.create().withClaim(USER_NAME, user.getName())
                 .withExpiresAt(new Date(System.currentTimeMillis() + expiryTime))
                 .withIssuer(issuer)
                 .sign(algorithm);
@@ -40,7 +39,7 @@ public class JWTService {
 
      public String  getUserName(String token){
          DecodedJWT decodedJWT =JWT.require(algorithm).withIssuer(issuer).build().verify(token);
-         return  decodedJWT.getClaim("USER_NAME").asString();
+         return  decodedJWT.getClaim(USER_NAME).asString();
          
 
      }

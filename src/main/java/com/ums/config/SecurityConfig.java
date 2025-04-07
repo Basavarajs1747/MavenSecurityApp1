@@ -1,6 +1,4 @@
 package com.ums.config;
-
-import ch.qos.logback.classic.spi.IThrowableProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +8,13 @@ import org.springframework.security.web.access.intercept.AuthorizationFilter;
 
 @Configuration
 public class SecurityConfig {
+
+   private JWTResponseFilter jwtResponseFilter;
+
+   public SecurityConfig(JWTResponseFilter jwtResponseFilter) {
+       this.jwtResponseFilter = jwtResponseFilter;
+
+   }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -21,9 +26,5 @@ public class SecurityConfig {
                 .anyRequest().authenticated();
         return http.build();
 
-    }
-    @Bean
-    public JwtResponseFilter jwtResponseFilter() {
-        return new JwtResponseFilter();
     }
 }
