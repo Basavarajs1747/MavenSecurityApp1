@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/countries")
 public class CountryController {
-
-
     @GetMapping("/addCountry")
-    public String addCountry(){
+    public String addCountry() {
         return "done";
 
     }
